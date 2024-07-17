@@ -1,5 +1,12 @@
-
-const comment = [
+const decriptionDB = [
+    "Мое перше фото! як вам?", 
+    "Вчорашній день був чудовій", 
+    "Мій настрій",
+    "Відпустка!!",
+    "хочу спробувати щось нове!",
+    "no comment..."
+]
+const commentDB = [
     "Все відмінно!", 
     "Загалом все непогано. Але не всі.", 
     "Коли ви робите фотографію, добре б прибирати палець із кадру. Зрештою, це просто непрофесійно.",
@@ -7,74 +14,43 @@ const comment = [
     "Я послизнувся на банановій шкірці і впустив фотоапарат на кота і у мене вийшла фотографія краще.",
     "Обличчя людей на фотці перекошені, ніби їх побивають. Як можна було зловити такий невдалий момент?"
 ]
-const db = [
-    {
-        id:1, 
-        url: 'photos/1.jpg',
-        decription: 'some random text as user',
-        likes: Math.round(Math.random()*175)+15,
-        comments: [
-            {
-                id: 135,
-                avatar: 'img/avatar-6.svg',
-                message: comment[Math.round(Math.random()*5)],
-                name: 'Артем',
-            }
-        ]
-    },
-    {
-        id:2, 
-        url: 'photos/2.jpg',
-        decription: 'some random text',
-        likes: Math.round(Math.random()*175)+15,
-        comments: [
-            {
-                id: 135,
-                avatar: 'img/avatar-6.svg',
-                message: comment[Math.round(Math.random()*5)],
-                name: 'Артем',
-            }
-        ]
-    }, {
-        id:3, 
-        url: 'photos/3.jpg',
-        decription: 'some random text',
-        likes: Math.round(Math.random()*175)+15,
-        comments: [
-            {
-                id: 135,
-                avatar: 'img/avatar-6.svg',
-                message: comment[Math.round(Math.random()*5)],
-                name: 'Артем',
-            }
-        ]
-    }, {
-        id:4, 
-        url: 'photos/4.jpg',
-        decription: 'some random text',
-        likes: Math.round(Math.random()*175)+15,
-        comments: [
-            {
-                id: 135,
-                avatar: 'img/avatar-6.svg',
-                message: comment[Math.round(Math.random()*5)],
-                name: 'Артем',
-            }
-        ]
-    }, {
-        id:5, 
-        url: 'photos/5.jpg',
-        decription: 'some random text',
-        likes: Math.round(Math.random()*175)+15,
-        comments: [
-            {
-                id: 135,
-                avatar: 'img/avatar-6.svg',
-                message: comment[Math.round(Math.random()*5)],
-                name: 'Артем',
-            }
-        ]
-    },
-    ]
+const authorDB = [
+    {name:'Артем',path:'img/avatar-1.svg'},
+    {name:'Василь',path:'img/avatar-2.svg'},
+    {name:'Ганна',path:'img/avatar-3.svg'},
+    {name:'Иван',path:'img/avatar-4.svg'},
+    {name:'Гусь',path:'img/avatar-5.svg'},
+    {name:'Катя',path:'img/avatar-6.svg'}
+]
 
-export {db} 
+const renderComments = (i) => {
+    const arr = new Array(i).fill(0)
+    let comment = arr.map( (item, index) => {
+        let autorId = Math.floor(Math.random()*authorDB.length);
+        return item = 
+                    { 
+                        id: index+1,
+                        avatar: authorDB[autorId].path,
+                        message: commentDB[Math.floor(Math.random()*commentDB.length)],
+                        name: authorDB[autorId].name,
+                    }
+    });
+return comment;
+}
+
+const renderDB = (i) => {
+    const arr = new Array(i).fill(0)
+    let DB = arr.map( (item, index) => {
+        let pathPhoto = `photos/${index+1}.jpg`
+        return item = 
+                    { 
+                        id: index+1,
+                        url: pathPhoto,
+                        decription: decriptionDB[Math.floor(Math.random()*decriptionDB.length)],
+                        likes: Math.floor(Math.random()*175)+15,
+                        comments: renderComments(Math.floor(Math.random()*commentDB.length)),
+                    }
+    });
+return DB;
+}
+ export {renderDB} 

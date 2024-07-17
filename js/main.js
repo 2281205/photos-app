@@ -1,2 +1,2 @@
-import {db} from "./db.js";
-console.log(db);
+import {renderDB} from "./db.js";
+console.log(renderDB(25));
