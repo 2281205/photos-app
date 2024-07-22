@@ -17,31 +17,47 @@ const comments = [
 ];
 const authors = ["Артем", "Василь", "Ганна", "Иван", "Гусь", "Катя", "Олег"];
 
+function randomElement(i) {
+  return i[Math.floor(Math.random() * i.length)];
+}
+
+function randomNumber(maxRange, minRange = 0) {
+  return Math.floor(Math.random() * maxRange) + minRange;
+}
+
+function createComment(index) {
+  return {
+    id: index + 1,
+    avatar: `img/avatar-${randomNumber(authors.length, 1)}.svg`,
+    message: randomElement(comments),
+    name: randomElement(authors),
+  };
+}
+
+function createPost(index, maxLike, minLike) {
+  return {
+    id: index + 1,
+    url: `photos/${index + 1}.jpg`,
+    decription: randomElement(decriptions),
+    likes: randomNumber(maxLike, minLike),
+    comments: renderComments(randomNumber(comments.length, 1)),
+  };
+}
+
 function renderComments(i) {
-  const arr = new Array(i).fill(0);
-  let comment = arr.map((item, index) => {
-    return (item = {
-      id: index + 1,
-      avatar: `img/avatar-${
-        Math.floor(Math.random() * authors.length) + 1
-      }.svg`,
-      message: comments[Math.floor(Math.random() * comments.length)],
-      name: authors[Math.floor(Math.random() * authors.length)],
-    });
+  const arr = new Array(i).fill();
+  const comment = arr.map((item, index) => {
+    return (item = createComment(index));
   });
   return comment;
 }
 
 function renderPosts(i) {
   const arr = new Array(i).fill(0);
-  let post = arr.map((item, index) => {
-    return (item = {
-      id: index + 1,
-      url: `photos/${index + 1}.jpg`,
-      decription: decriptions[Math.floor(Math.random() * decriptions.length)],
-      likes: Math.floor(Math.random() * 175) + 15,
-      comments: renderComments(Math.floor(Math.random() * comments.length) + 1),
-    });
+  const maxLike = 175;
+  const minLike = 15;
+  const post = arr.map((item, index) => {
+    return (item = createPost(index, maxLike, minLike));
   });
   return post;
 }
