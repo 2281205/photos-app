@@ -17,6 +17,11 @@ const comments = [
 ];
 const authors = ["Артем", "Василь", "Ганна", "Иван", "Гусь", "Катя", "Олег"];
 
+const likeRange = {
+  min: 15,
+  max: 175,
+};
+
 function randomElement(i) {
   return i[Math.floor(Math.random() * i.length)];
 }
@@ -54,10 +59,8 @@ function renderComments(i) {
 
 function renderPosts(i) {
   const arr = new Array(i).fill(0);
-  const maxLike = 175;
-  const minLike = 15;
   const post = arr.map((item, index) => {
-    return (item = createPost(index, maxLike, minLike));
+    return (item = createPost(index, likeRange.max, likeRange.min));
   });
   return post;
 }
