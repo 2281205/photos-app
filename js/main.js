@@ -1,2 +1,2 @@
-import { renderPosts } from "./db.js";
-console.log(renderPosts(25));
+import { getPostsArray } from "./db.js";
+console.log(getPostsArray(25));
