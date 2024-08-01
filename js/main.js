@@ -19,6 +19,13 @@ function renderUsersPosts(countPosts) {
     fragment.appendChild(getOnePost(element))
   );
   appendPost.before(fragment);
+  document.querySelector(".pictures").addEventListener(
+    "click",
+    (e) => {
+      e.preventDefault();
+      e.srcElement.innerText && e.srcElement.innerText++;
+    },
+    true
+  );
 }
-
-renderUsersPosts(25);
+renderUsersPosts(5);
