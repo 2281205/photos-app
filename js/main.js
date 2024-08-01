@@ -1,19 +1,24 @@
 import { getPostsArray } from "./db.js";
 
-function showPost(post) {
-  const postItem = document.querySelector("#picture").cloneNode(true).content;
-  const postImg = postItem.querySelector(".picture__img");
-  const postComment = postItem.querySelector(".picture__comments");
-  const postLikes = postItem.querySelector(".picture__likes");
-  postImg.src = post.url;
-  postImg.alt = post.decription;
-  postComment.textContent = post.comments.length;
-  postLikes.textContent = post.likes;
+function getOnePost(postData) {
+  const postClone = document.querySelector("#picture").cloneNode(true).content;
+  const postImg = postClone.querySelector(".picture__img");
+  const postComment = postClone.querySelector(".picture__comments");
+  const postLikes = postClone.querySelector(".picture__likes");
+  postImg.src = postData.url;
+  postImg.alt = postData.decription;
+  postComment.textContent = postData.comments.length;
+  postLikes.textContent = postData.likes;
+  return postClone;
+}
 
+function renderUsersPosts(countPosts) {
   const appendPost = document.querySelector(".pictures__title");
   const fragment = document.createDocumentFragment();
-  fragment.appendChild(postItem);
+  getPostsArray(countPosts).forEach((element) =>
+    fragment.appendChild(getOnePost(element))
+  );
   appendPost.before(fragment);
 }
 
-getPostsArray(4).forEach((element) => showPost(element));
+renderUsersPosts(25);
