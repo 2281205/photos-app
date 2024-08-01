@@ -17,51 +17,51 @@ const comments = [
 ];
 const authors = ["Артем", "Василь", "Ганна", "Иван", "Гусь", "Катя", "Олег"];
 
-const likeRange = {
+const countRange = {
+  start: 1,
   min: 15,
   max: 175,
 };
 
-function randomElement(i) {
-  return i[Math.floor(Math.random() * i.length)];
+function getRandomElement(array) {
+  return array[Math.floor(Math.random() * array.length)];
 }
 
-function randomNumber(maxRange, minRange = 0) {
+function getRandomNumber(maxRange, minRange = 0) {
   return Math.floor(Math.random() * maxRange) + minRange;
 }
 
-function createComment(index) {
-  return {
-    id: index + 1,
-    avatar: `img/avatar-${randomNumber(authors.length, 1)}.svg`,
-    message: randomElement(comments),
-    name: randomElement(authors),
-  };
-}
-
-function createPost(index, maxLike, minLike) {
-  return {
-    id: index + 1,
-    url: `photos/${index + 1}.jpg`,
-    decription: randomElement(decriptions),
-    likes: randomNumber(maxLike, minLike),
-    comments: renderComments(randomNumber(comments.length, 1)),
-  };
-}
-
-function renderComments(i) {
-  const arr = new Array(i).fill();
-  const comment = arr.map((item, index) => {
-    return (item = createComment(index));
-  });
+function getCommentsArray(countOfComments) {
+  const arr = new Array(countOfComments).fill();
+  const comment = arr.map(
+    (item, index) =>
+      (item = {
+        id: index + countRange.start,
+        avatar: `img/avatar-${getRandomNumber(
+          authors.length,
+          countRange.start
+        )}.svg`,
+        message: getRandomElement(comments),
+        name: getRandomElement(authors),
+      })
+  );
   return comment;
 }
 
-function renderPosts(i) {
-  const arr = new Array(i).fill(0);
-  const post = arr.map((item, index) => {
-    return (item = createPost(index, likeRange.max, likeRange.min));
-  });
+function getPostsArray(countOfPosts) {
+  const arr = new Array(countOfPosts).fill();
+  const post = arr.map(
+    (item, index) =>
+      (item = {
+        id: index + countRange.start,
+        url: `photos/${index + countRange.start}.jpg`,
+        decription: getRandomElement(decriptions),
+        likes: getRandomNumber(countRange.max, countRange.min),
+        comments: getCommentsArray(
+          getRandomNumber(comments.length, countRange.start)
+        ),
+      })
+  );
   return post;
 }
-export { renderPosts };
+export { getPostsArray };

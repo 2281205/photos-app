@@ -1,4 +1,4 @@
-import { renderPosts } from "./db.js";
+import { getPostsArray } from "./db.js";
 
 function showPost(post) {
   const postItem = document.querySelector("#picture").cloneNode(true).content;
@@ -16,4 +16,4 @@ function showPost(post) {
   appendPost.before(fragment);
 }
 
-renderPosts(10).forEach((element) => showPost(element));
+getPostsArray(4).forEach((element) => showPost(element));
