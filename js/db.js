@@ -4,7 +4,7 @@ const decriptions = [
   "Мій настрій",
   "Відпустка!!",
   "хочу спробувати щось нове!",
-  "no comment...",
+  "no comment ;((...",
   "+1 photo",
 ];
 const comments = [
@@ -15,7 +15,7 @@ const comments = [
   "Я послизнувся на банановій шкірці і впустив фотоапарат на кота і у мене вийшла фотографія краще.",
   "Обличчя людей на фотці перекошені, ніби їх побивають. Як можна було зловити такий невдалий момент?",
 ];
-const authors = ["Артем", "Василь", "Ганна", "Иван", "Гусь", "Катя", "Олег"];
+const authors = ["Артем", "Василь", "Ганна", "Иван", "Гусь", "Катя"];
 
 const countRange = {
   start: 1,
@@ -54,7 +54,15 @@ function getPostsArray(countOfPosts) {
     (item, index) =>
       (item = {
         id: index + countRange.start,
-        url: `photos/${index + countRange.start}.jpg`,
+        avatar: `img/avatar-${getRandomNumber(
+          authors.length,
+          countRange.start
+        )}.svg`,
+        name: getRandomElement(authors),
+        url:
+          index >= 25
+            ? `photos/${getRandomNumber(25, 1)}.jpg`
+            : `photos/${index + countRange.start}.jpg`,
         decription: getRandomElement(decriptions),
         likes: getRandomNumber(countRange.max, countRange.min),
         comments: getCommentsArray(
