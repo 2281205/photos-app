@@ -48,7 +48,7 @@ function getCommentsArray(countOfComments) {
   return comment;
 }
 
-function getPostsArray(countOfPosts) {
+export function getPostsArray(countOfPosts) {
   const arr = new Array(countOfPosts).fill();
   const post = arr.map(
     (item, index) =>
@@ -72,4 +72,3 @@ function getPostsArray(countOfPosts) {
   );
   return post;
 }
-export { getPostsArray };
